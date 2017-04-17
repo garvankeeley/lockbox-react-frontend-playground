@@ -1,15 +1,3 @@
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 table {
   border: 1px solid darkgrey;
   border-collapse: collapse;
@@ -78,3 +66,27 @@ tr:hover {
 
 .gen-password > input  { margin-bottom: 10px; }
 
+#wrap {
+    overflow-y:scroll;
+    height: 400px;
+    display:block;
+}
+
+
+/*
+table.tableSection thead {
+  display: table;
+  width: calc(100% - 4px); 
+}
+
+table.tableSection tbody {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 150px;
+  display: block;
+}
+
+table.tableSection tr {
+
+  table-layout: fixed;
+}*/
