@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import dateFormat from 'dateformat';
 
+export const TitleColumn = ({ text }) => { return <td>{text}</td> };
+
 export const PasswordColumn = ({ text }) => { return <td>{text}</td> };
 
 export class LoginColumn extends Component {

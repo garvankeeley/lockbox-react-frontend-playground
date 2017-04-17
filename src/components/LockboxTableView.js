@@ -4,13 +4,14 @@ import LockboxTableRow from './LockboxTableRow'
 class LockboxTableView extends React.Component {
   render () {
     const state = this.context.store.getState();
-    const rows = state.rows;
+    const rows = state.lockboxItems;
     const show = state.isShowPwOn;
     return (
       <table>
         <thead>
           <tr>
             <th>&nbsp;</th>
+            <th>Title</th>
             <th>Site</th>
             <th>Username</th>
             <th>Last Modified</th>
@@ -23,7 +24,7 @@ class LockboxTableView extends React.Component {
           </tr>
         </thead>
         <tbody>
-          { rows.map(row => (<LockboxTableRow showPw={show} row={row}/>)) }
+          { rows.map(item => (<LockboxTableRow showPw={show} lockboxItem={item}/>)) }
         </tbody>
       </table> );
   }

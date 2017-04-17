@@ -1,22 +1,23 @@
 import React from 'react';
-import { LoginColumn, DateColumn, PasswordColumn, StrengthColumn } from './columns/columns';
+import { TitleColumn, LoginColumn, DateColumn, PasswordColumn, StrengthColumn } from './columns/columns';
 import { ActionColumn } from './columns/ActionColumn';
 import { DomainColumn } from './columns/DomainColumn';
 
 const LockBoxTableRow = (props) => {
-  const row = props.row;
+  const item = props.lockboxItem;
   const showPw = props.showPw;
   return <tr>
         <ActionColumn />
-        <DomainColumn text={row.c1} />
-        <LoginColumn text={row.c2} />
+        <TitleColumn text={item.title} />
+        <DomainColumn text={item.site} />
+        <LoginColumn text={item.username} />
         <DateColumn />
         <DateColumn />
         <DateColumn />
         <td>1</td>
         <td>Yes📄</td>
-        {showPw && <PasswordColumn text='secrets' /> }
-        {showPw && <StrengthColumn strength={row.c3} /> }
+        {showPw && <PasswordColumn text={item.password} /> }
+        {showPw && <StrengthColumn strength={item.strength} /> }
         </tr>
 };
 
