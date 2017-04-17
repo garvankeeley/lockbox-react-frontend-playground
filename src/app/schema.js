@@ -1,5 +1,5 @@
 export const lockboxItemSchema = {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    //"$schema": "http://json-schema.org/draft-04/schema#",
     "title": "LockboxItem",
     "description": "A single entry in the lockbox store",
     "type": "object",
@@ -19,15 +19,15 @@ export const lockboxItemSchema = {
             "type": "string"
         },
 
-        "username": { "type": string },
-        "password": { "type": string },
+        "username": { "type": "string" },
+        "password": { "type": "string" },
         "strength": { "type": "number" }, /* perhaps calculated on-demand? */
-        "note": { "type": string },
+        "note": { "type": "string" },
 
-        "date_created": { "type": "date-time" },
-        "date_modified": { "type": "date-time" },
-        "date_last_used": { "type": "date-time" },
-        "times_used:": {
+        "dateCreated": { "type": "date-time" },
+        "dateModified": { "type": "date-time" },
+        "dateLastUsed": { "type": "date-time" },
+        "timesUsed:": {
             "description": "Count the times accessed",
             "type": "number"
         },
@@ -37,12 +37,12 @@ export const lockboxItemSchema = {
             "type": "array"
         },
 
-        "is_current_item": {
+        "isCurrentItem": {
             /* Replace this indicator with a separate list of current items -just using this for demo'ing. */
             "description": "Indicates the current item, thus the tip of the history.",
             "type": "boolean"
         }
     },
 
-    "required": ["username", "password", "is_current_item"]
-}
+    "required": ["username", "password", "isCurrentItem"]
+};
