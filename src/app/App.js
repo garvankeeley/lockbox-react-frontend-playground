@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import './App.css';
 import LockboxTableView from '../components/LockboxTableView';
 import ShowPasswordsButton from '../components/actions/ShowPasswordsButton';

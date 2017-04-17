@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import LockboxTableRow from './LockboxTableRow'
 
 class LockboxTableView extends React.Component {

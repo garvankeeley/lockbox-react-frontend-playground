@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { LoginColumn, DateColumn, PasswordColumn, StrengthColumn } from './columns/columns';
 import { ActionColumn } from './columns/ActionColumn';
 import { DomainColumn } from './columns/DomainColumn';

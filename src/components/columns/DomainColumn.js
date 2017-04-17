@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { actionShowPw } from '../../redux/actions';
 
 export class DomainColumn extends Component {
   static propTypes = {

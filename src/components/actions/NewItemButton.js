@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component} from 'react';
 import Modal, {closeStyle} from '../../ext/simple-modal'
 
 class CheckboxInput extends Component {
@@ -35,18 +35,17 @@ class NewItemButton extends Component {
   render() {
     const addedStyles = { borderRadius: 1, verticalAlign: 'middle' };
     const style = Object.assign({}, addedStyles, this.props.style);
-    const store = this.context.store;
 
     return <span><button className='btn'
-      onClick = {() => this.handleClick()}
+      onClick={() => this.handleClick()}
       style={style}>Add Site
       </button>
 
       <Modal
-        containerClassName = "test"
-        closeOnOuterClick = {false}
-        show = {this.state.isShowingModal}
-        onClose = {() => { this.handleClose() }}>
+        containerClassName="test"
+        closeOnOuterClick={false}
+        show={this.state.isShowingModal}
+        onClose={() => { this.handleClose() }}>
         <a style={closeStyle} onClick={() => { this.handleClose() }}>✖</a>
         <div>
           <h2>Add Site</h2>
@@ -54,8 +53,8 @@ class NewItemButton extends Component {
             <label>Site:</label><input name='website' placeholder='https://www.example.com'/>
             <label>Username:</label><input name='username' placeholder='foo@mail.com'/>
             <label>Password:</label><input name='password' placeholder='********'/>
-            <fieldset className='gen-password' 
-              style ={{ border: '1px solid gray', 
+            <fieldset className='gen-password'
+              style={{ border: '1px solid gray',
                         paddingBlockStart: '15px',
                         fontSize: '80%',
                         fontWeight: 'bold'
@@ -65,7 +64,7 @@ class NewItemButton extends Component {
                 }}>Generate Password</legend>
 
               <label style={{ marginRight: '10px'}}>Length:</label><input type='number'
-                min='4' max='255' step='2' defaultValue='10' 
+                min='4' max='255' step='2' defaultValue='10'
                 style={{minWidth: '40px', maxWidth: '40px'}} /><br />
 
               <CheckboxInput checked={true} label='Use words' name='name'/><br />
@@ -76,9 +75,9 @@ class NewItemButton extends Component {
               <button>Generate</button>
             </fieldset>
           </form>
-          <button onClick = {() => { this.handleClose() }}>Save</button>
+          <button onClick={() => { this.handleClose() }}>Save</button>
           &nbsp;&nbsp;
-          <button onClick = {() => { this.handleClose() }}>Cancel</button>
+          <button onClick={() => { this.handleClose() }}>Cancel</button>
         </div>
       </Modal>
     </span>
