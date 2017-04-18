@@ -1,22 +1,8 @@
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 table {
   border: 1px solid darkgrey;
   border-collapse: collapse;
   empty-cells: show;
   font-family: sans-serif;
-  font-weight: 100;
-  /*line-height: 24px;*/
 }
 
 th {
@@ -25,8 +11,9 @@ th {
 }
 
 thead {
+    vertical-align: middle;
+    font-size: 90%;
     text-align: left;
-    vertical-align: bottom;
 }
 
 tr:nth-of-type(odd) {
@@ -37,10 +24,11 @@ td {
   background-color: transparent;
   color: black;
   vertical-align: middle;
+  white-space:nowrap;
 }
 
 td, th {
-    border-left: 1px solid #cbcbcb;
+    /*border-left: 1px solid #cbcbcb;*/
     font-size: inherit;
     margin: 0;
     overflow: visible;

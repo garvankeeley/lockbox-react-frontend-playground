@@ -1,9 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import dateFormat from 'dateformat';
 
-export const TitleColumn = ({ text }) => { return <td>{text}</td> };
+export class TitleColumn extends Component {
+  render() {
+    return <td>{this.props.text}</td> ;
+  }
+}
 
-export const PasswordColumn = ({ text }) => { return <td>{text}</td> };
+export class PasswordColumn extends Component {
+ render() {
+    return <td>{this.props.text}</td> ;
+  }
+}
 
 export class LoginColumn extends Component {
   static propTypes = {
@@ -15,32 +23,33 @@ export class LoginColumn extends Component {
 }
 
 export class DateColumn extends Component {
-
     render() {
-      const date = dateFormat(new Date(), "mmmm, dd, yyyy");
+      const date = dateFormat(new Date(), "mmmm dd, yyyy");
       return (<td>{date}</td>);
     }
 }
 
-export const StrengthColumn = ({ strength }) => {
-  let color = 'dodgerblue';
-  let max = 20;
-  return <td><div style={{ verticalAlign: 'middle' }}>
-    <div style={{
-        position:'relative',
-        background: 'DarkGray',
-        height: max,
-        width: 8,
-        border: '1px solid black',
-        borderRadius: 3,
-      }}>
+export class StrengthColumn extends Component {
+  render() {
+    let color = 'dodgerblue';
+    let max = 20;
+    return (<td><div style={{ verticalAlign: 'middle' }}>
       <div style={{
-          position:'absolute',
-          bottom:0,
-          background: color,
-          height: strength / 100.0 * max,
+          position:'relative',
+          background: 'DarkGray',
+          height: max,
           width: 8,
-          borderRadius: 2,
-      }}></div>
-    </div></div></td>
+          border: '1px solid black',
+          borderRadius: 3,
+        }}>
+        <div style={{
+            position:'absolute',
+            bottom:0,
+            background: color,
+            height: this.props.strength / 100.0 * max,
+            width: 8,
+            borderRadius: 2,
+        }}></div>
+      </div></div></td>);
+  }
 }

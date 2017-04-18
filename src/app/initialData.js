@@ -1,6 +1,6 @@
 import LockboxItem from './LockboxItem'
 
-export const initialData = {
+export var initialData = {
   isShowPwOn: false,
   lockboxItems: [
     new LockboxItem({title: 'Google', site: 'https://google.com', username: 'john@smith.com', password: 'asdfhjkl',
@@ -11,3 +11,8 @@ export const initialData = {
       strength: 100, note: 'A note that is interesting'}),
   ]  
 };
+
+initialData.lockboxItems = [...initialData.lockboxItems, ...initialData.lockboxItems];
+initialData.lockboxItems = [...initialData.lockboxItems, ...initialData.lockboxItems];
+initialData.lockboxItems = [...initialData.lockboxItems, ...initialData.lockboxItems];
+initialData.lockboxItems = [...initialData.lockboxItems, ...initialData.lockboxItems];
