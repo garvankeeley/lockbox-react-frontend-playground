@@ -1,53 +1,61 @@
 import React, { Component } from 'react';
-import Modal, { closeStyle } from '../../ext/simple-modal'
-import { actionInputChanged } from '../../redux/actions'
-import passwordGenerator from 'password-generator'
+import Modal, { closeStyle } from '../../ext/simple-modal';
+import { actionInputChanged } from '../../redux/actions';
+import passwordGenerator from 'password-generator';
+import zxcvbn from 'zxcvbn';
+import CheckboxInput from '../inputs/CheckboxInput';
+import SpinnerInput from '../inputs/SpinnerInput';
 import 
-{ SETTING_PW_LENGTH, SETTING_PW_LC_ONLY, SETTING_PW_USE_NUMBERS, SETTING_PW_USE_SPECIAL_CHAR } from '../../redux/app-constants'
+{ SETTING_PW_LENGTH, SETTING_PW_LC_ONLY, SETTING_PW_USE_NUMBERS, SETTING_PW_USE_SPECIAL_CHAR } from '../../redux/app-constants';
 
-class CheckboxInput extends Component {
-  state = { checked: this.props.checked || false }
-
-  render() {
-    return (
-      <label>
-        <input type="checkbox"
-          name={this.props.name}
-          checked={this.state.checked}
-          onChange={(e) => this.handleClick(e)}
-          value={this.props.value} />
-        {this.props.label}
-      </label>
-    );
-  }
-
-  handleClick = (e) => {
-    this.setState({ checked: e.target.checked });
-    this.props.storeToggleState(this.props.name, e.target.checked);
-  }
-}
-
-class Spinner extends Component {
-  state = { value: this.props.value || 12 }
+class PasswordInput extends Component {
+   state = { value: this.props.value }
 
   handleChange = (event) => {
     this.setState({ value: event.target.value });
-    this.props.storeSpinnerState(this.props.name, event.target.value);
+    this.props.onChange(event.target.value);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({value: nextProps.value})  
   }
 
   render() {
-    return (<div>
-      <label style={{ marginRight: 10 }}>Length:</label>
-      <input type='number' name={this.props.name}
-        value={this.state.value} onChange={(e) => { this.handleChange(e) }}
-        min='4' max='255' step='2'
-        style={{ minWidth: 40, maxWidth: 40 }} />
+    let color = 'dodgerblue';
+    let width = this.props.strength * 25.0;
+    console.log(width);
+    console.log(this.props.strength);
+
+    const strElement = (
+      <div style={{ verticalAlign: 'middle', marginTop: 4 }}>
+        <div style={{
+            position:'relative',
+            background: 'DarkGray',
+            height: 4,
+            width: '100%',
+            border: '1px solid black',
+            borderRadius: 1,
+          }}>
+          <div style={{
+              position:'absolute',
+              bottom:0,
+              background: color,
+              width: `${width}%`,
+              height: 4,
+              borderRadius: 1,
+          }}></div>
+        </div>
+      </div>);
+  
+    return (<div style={{ float: 'left' }}>
+    <input type='text' value={this.state.value} onChange={(e) => this.handleChange(e)} name='password' />
+    {strElement}
     </div>)
   }
 }
 
 class NewItemButton extends Component {
-  state = { isShowingModal: false }
+  state = { isShowingModal: false, passwordInputValue: '' }
 
   storeInputState = (name, value) => {
     this.context.store.dispatch(actionInputChanged(name, value));
@@ -67,10 +75,17 @@ class NewItemButton extends Component {
     let re = `${letters}${storeState[SETTING_PW_LC_ONLY] ? '' : letters.toUpperCase()}` +
       `${storeState[SETTING_PW_USE_NUMBERS] ? '1-9' : ''}${storeState[SETTING_PW_USE_SPECIAL_CHAR] ? '\\W' : ''}`;
     console.log(re);
-    this.password.value = passwordGenerator(len, false, `[${re}]`);
+    this.setState({ passwordInputValue: passwordGenerator(len, false, `[${re}]`) });
+  }
+
+  handlePasswordChanged = (val) => {
+    this.setState({ passwordInputValue: val});
   }
 
   render() {
+    const strength = zxcvbn(this.state.passwordInputValue);
+    console.log(strength);
+
     const addedStyles = { borderRadius: 1, verticalAlign: 'middle' };
     const style = Object.assign({}, addedStyles, this.props.style);
     const storeState = this.context.store.getState();
@@ -103,12 +118,17 @@ class NewItemButton extends Component {
         <div>
           <h2>Add Site</h2>
           <form className='form-new-login' onSubmit={(e) => { e.preventDefault(); }}>
-            <label>Title:</label><input name='title' placeholder='Example Website' />
-            <label>Site:</label><input name='website' placeholder='https://www.example.com' />
-            <label>Username:</label><input name='username' placeholder='foo@mail.com' />
-            <label>Password:</label><input ref={(e) => { this.password = e }} name='password' placeholder='********' />
+            <label>Title:</label>
+            <input name='title' placeholder='Example Website' />
+            <label>Site:</label>
+            <input name='website' placeholder='https://www.example.com' />
+            <label>Username:</label>
+            <input name='username' placeholder='foo@mail.com' />
+            <label style={{ float: 'left'}}>Password:</label>
+            <PasswordInput value={this.state.passwordInputValue} onChange={this.handlePasswordChanged} strength={strength.score}/>
             <fieldset className='gen-password'
               style={{
+                marginTop: 50,
                 width: '80%',
                 border: '1px solid gray',
                 paddingBlockStart: 15,
@@ -119,7 +139,7 @@ class NewItemButton extends Component {
                 border: '1px solid gray', fontSize: '80%', padding: '0.2em 0.5em'
               }}>Generate Password</legend>
 
-              <Spinner name={SETTING_PW_LENGTH} value={storeState[SETTING_PW_LENGTH] || 12}
+              <SpinnerInput name={SETTING_PW_LENGTH} value={storeState[SETTING_PW_LENGTH] || 12}
                 storeSpinnerState={this.storeInputState} />
 
               {checkboxes}
