@@ -21,7 +21,7 @@ class CheckboxInput extends Component {
     );
   }
 
-  handleClick(e) {
+  handleClick = (e) => {
     this.setState({ checked: e.target.checked });
     this.props.storeToggleState(this.props.name, e.target.checked);
   }
@@ -30,7 +30,7 @@ class CheckboxInput extends Component {
 class Spinner extends Component {
   state = { value: this.props.value || 12 }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ value: event.target.value });
     this.props.storeSpinnerState(this.props.name, event.target.value);
   }
@@ -49,13 +49,15 @@ class Spinner extends Component {
 class NewItemButton extends Component {
   state = { isShowingModal: false }
 
-  storeInputState(name, value) {
+  storeInputState = (name, value) => {
     this.context.store.dispatch(actionInputChanged(name, value));
   }
 
-  handleShowModal(showIt) { this.setState({ isShowingModal: showIt }); }
+  handleShowModal = (showIt) => { 
+    this.setState({ isShowingModal: showIt }); 
+  }
 
-  generatePw() {
+  generatePw = () => {
     const storeState = this.context.store.getState();
     const len = storeState[SETTING_PW_LENGTH] !== undefined ? 
       storeState[SETTING_PW_LENGTH] : 12;
@@ -78,7 +80,7 @@ class NewItemButton extends Component {
     const createCheckbox = (label, key, defaultVal) => {
       const initial = storeState[key] !== undefined ? storeState[key] : defaultVal;
       checkboxes.push(<div><CheckboxInput checked={initial} label={label} name={key}
-        storeToggleState={(k, v) => { this.storeInputState(k, v) }} /></div>)
+        storeToggleState={this.storeInputState} /></div>)
     }
 
     [['Use words (not hooked up)', 'pw-use-words', false],
@@ -96,8 +98,8 @@ class NewItemButton extends Component {
         containerClassName="test"
         closeOnOuterClick={false}
         show={this.state.isShowingModal}
-        onClose={() => { this.handleShowModal(false) }}>
-        <a style={closeStyle} onClick={() => { this.handleShowModal(false) }}>✖</a>
+        onClose={() => this.handleShowModal(false)}>
+        <a style={closeStyle} onClick={() => this.handleShowModal(false)}>✖</a>
         <div>
           <h2>Add Site</h2>
           <form className='form-new-login' onSubmit={(e) => { e.preventDefault(); }}>
@@ -118,18 +120,18 @@ class NewItemButton extends Component {
               }}>Generate Password</legend>
 
               <Spinner name={SETTING_PW_LENGTH} value={storeState[SETTING_PW_LENGTH] || 12}
-                storeSpinnerState={(name, val) => { this.storeInputState(name, val) }} />
+                storeSpinnerState={this.storeInputState} />
 
               {checkboxes}
 
-              <button onClick={(e) => { this.generatePw() }}>Generate</button>
+              <button onClick={this.generatePw} >Generate</button>
             </fieldset>
             <label style={{ marginTop: 10, marginBottom: 0 }} >Note</label><br />
             <textarea style={{ width: '90%', height: 70, resize: 'none' }}></textarea>
           </form>
-          <button onClick={() => { this.handleShowModal(false) }}>Save</button>
+          <button onClick={() => this.handleShowModal(false)} >Save</button>
           &nbsp;&nbsp;
-          <button onClick={() => { this.handleShowModal(false) }}>Cancel</button>
+          <button onClick={() => this.handleShowModal(false)} >Cancel</button>
         </div>
       </Modal>
     </span>

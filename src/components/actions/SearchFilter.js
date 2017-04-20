@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { actionFilterTable } from '../../redux/actions';
 
 class SearchFilter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {filterText: ''};
-  }
+  state = { filterText: '' };
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({filterText: e.target.value});
     setTimeout(() => {
       this.context.store.dispatch(actionFilterTable(this.state.filterText));
@@ -27,7 +24,7 @@ class SearchFilter extends Component {
     return <input type='text' placeholder="Search" 
       style={style}
       value={this.state.value}
-      onChange={(e) => {this.handleChange(e)}} />
+      onChange={this.handleChange} />
   }
 }
 

@@ -44,7 +44,7 @@ class LockboxTableView extends React.Component {
       }
       rowsToShow = allRows.filter(item => {
        return [item.title, item.site, item.username, item.note].some(
-            (haystack) => { return searchNoCase(haystack, state.filterText) });
+            haystack => searchNoCase(haystack, state.filterText) );
       });
     }
 

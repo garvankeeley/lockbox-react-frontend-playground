@@ -1,15 +1,14 @@
 import * as types from './app-constants'
 
-export const appReducer = (state = {}, action)  => {
-  if (action.type === types.ACTION_SHOW_PASSWORDS) {
-    return Object.assign({}, state, { isShowPwOn: action.isOn });
-  } else if (action.type === types.ACTION_FILTER_TABLE) {
-    return Object.assign({}, state, { filterText: action.filterText });
-  } else if (action.type === types.ACTION_PERSIST_INPUT_VALUE) {
-    let obj = {};
-    obj[action.name] = action.value;
-    return Object.assign({}, state, obj);  
-  }
-
-  return state;
+export const appReducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.ACTION_SHOW_PASSWORDS:
+      return Object.assign({}, state, { isShowPwOn: action.isOn });
+    case types.ACTION_FILTER_TABLE:
+      return Object.assign({}, state, { filterText: action.filterText });
+    case types.ACTION_PERSIST_INPUT_VALUE:
+      return Object.assign({}, state, { [`${action.name}`]: action.value });
+    default:
+      return state;
+ }
 }

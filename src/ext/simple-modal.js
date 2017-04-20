@@ -8,10 +8,7 @@ export default class Modal extends React.Component{
 
   constructor(props){
     super()
-    this.hideOnOuterClick = this.hideOnOuterClick.bind(this)
-    this.fadeIn = this.fadeIn.bind(this)
-    this.fadeOut = this.fadeOut.bind(this)
-
+    
     let opacity = 0,
       display = 'block',
       visibility = 'hidden'
@@ -31,22 +28,22 @@ export default class Modal extends React.Component{
 
   }
 
-  hideOnOuterClick(event){
+  hideOnOuterClick = (event) => {
     if(this.props.closeOnOuterClick === false) return
     if(event.target.dataset.modal && this.props.onClose instanceof Function) this.props.onClose(event)
   }
 
   componentWillReceiveProps(props){
-    if(this.props.show != props.show){
+    if(this.props.show !== props.show){
       if(this.props.transitionSpeed){
-        if(props.show == true) this.fadeIn()
+        if(props.show) this.fadeIn()
         else this.fadeOut()
       }
       else this.setState({show: props.show})
     }
   }
 
-  fadeIn(){
+  fadeIn = () => {
     this.setState({
       display: 'block',
       visibility: 'visible',
@@ -58,7 +55,7 @@ export default class Modal extends React.Component{
     })
   }
 
-  fadeOut(){
+  fadeOut = () => {
     this.setState({opacity: 0}, ()=>{
       setTimeout(()=>{
         this.setState({show: false})
@@ -99,7 +96,7 @@ function _filteredProps(props) {
     'show',
     'onClose',
     'transitionSpeed'
-  ].map( p => {
+  ].forEach( p => {
     delete filtered[p]
   })
   return filtered
