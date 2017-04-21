@@ -9,7 +9,6 @@
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
-    "uri-parse-lib": "^2.0.10"
     "uri-parse-lib": "^2.0.10",
     "zxcvbn": "^4.4.2"
   },
