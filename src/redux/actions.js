@@ -5,3 +5,6 @@ export const actionFilterTable = filterText => ({ type: types.ACTION_FILTER_TABL
 export const actionInputChanged = (name, value) => {
     return ({ type: types.ACTION_PERSIST_INPUT_VALUE, name, value });
 }
+export const actionNewSite = (lockboxItem) => {
+    return ({ type: types.ACTION_NEW_SITE, lockboxItem})
+}

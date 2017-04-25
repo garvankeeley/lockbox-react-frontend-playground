@@ -8,9 +8,9 @@ const LockBoxTableRow = (props) => {
   const item = props.lockboxItem;
   const showPw = props.showPw;
   const strength = zxcvbn(item.password).score * 25;
-   
+
   return <tr>
-        <ActionColumn />
+        <ActionColumn editButtonClicked={() => props.editButtonClicked(item) }/>
         <TitleColumn text={item.title} />
         <DomainColumn text={item.site} />
         <LoginColumn text={item.username} />

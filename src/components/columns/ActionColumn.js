@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class ActionColumn extends Component {
-  render() {
-    return <td>
-        <button className='btn' >✎</button>
+export const ActionColumn = (props) => {
+    return (
+      <td>
+        <button className='btn' onClick={() => props.editButtonClicked()}>✎</button>
         <span style={{ marginLeft: 10 }}></span>
         <button className='btn'>✖</button>
-      </td>;
-  }
+      </td>);
 }
+

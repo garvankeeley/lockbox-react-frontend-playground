@@ -8,6 +8,10 @@ export const appReducer = (state = {}, action) => {
       return Object.assign({}, state, { filterText: action.filterText });
     case types.ACTION_PERSIST_INPUT_VALUE:
       return Object.assign({}, state, { [`${action.name}`]: action.value });
+    case types.ACTION_NEW_SITE:
+      let items = state.lockboxItems;
+      items.push( action.lockboxItem );
+      return Object.assign({}, state, { lockboxItems: items});
     default:
       return state;
  }

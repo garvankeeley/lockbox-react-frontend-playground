@@ -71,7 +71,9 @@ class LockboxTableView extends React.Component {
 
         <table style={{ height: '250px', display: 'block', overflowY: 'scroll' }}>
           <tbody ref={(e) => { this.mainTableBody = e }}>
-            {rowsToShow.map(item => (<LockboxTableRow showPw={show} lockboxItem={item} />))}
+            {rowsToShow.map(item => (
+              <LockboxTableRow showPw={show} lockboxItem={item} 
+              editButtonClicked={(item) => this.props.editButtonClicked(item)}/>))}
           </tbody>
         </table>
       </div>);
