@@ -11,7 +11,7 @@ import { initialData } from './app/initialData'
 const persistedState = localStorage.getItem('reduxState') ?
                         JSON.parse(localStorage.getItem('reduxState')) : null
 
-let store = createStore(appReducer, persistedState || initialData);
+let store = createStore(appReducer);
 
 const render = () => ReactDOM.render(
   <Provider store={store}>

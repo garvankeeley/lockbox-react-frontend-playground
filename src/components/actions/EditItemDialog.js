@@ -101,14 +101,14 @@ class EditItemDialog extends Component {
   }
 
   generatePw = () => {
-    const storeState = this.context.store.getState();
-    const len = storeState[SETTING_PW_LENGTH] !== undefined ?
-      storeState[SETTING_PW_LENGTH] : 12;
+    const reduxUIState = this.context.store.getState().uiState;
+    const len = reduxUIState[SETTING_PW_LENGTH] !== undefined ?
+      reduxUIState[SETTING_PW_LENGTH] : 12;
 
     const letters = 'a-hj-np-z'; // no O or I
 
-    let re = `${letters}${storeState[SETTING_PW_LC_ONLY] ? '' : letters.toUpperCase()}` +
-      `${storeState[SETTING_PW_USE_NUMBERS] ? '1-9' : ''}${storeState[SETTING_PW_USE_SPECIAL_CHAR] ? '\\W' : ''}`;
+    let re = `${letters}${reduxUIState[SETTING_PW_LC_ONLY] ? '' : letters.toUpperCase()}` +
+      `${reduxUIState[SETTING_PW_USE_NUMBERS] ? '1-9' : ''}${reduxUIState[SETTING_PW_USE_SPECIAL_CHAR] ? '\\W' : ''}`;
     console.log(re);
     this.setState({ passwordInputValue: passwordGenerator(len, false, `[${re}]`) });
   }
@@ -123,12 +123,12 @@ class EditItemDialog extends Component {
 
     const addedStyles = { borderRadius: 1, verticalAlign: 'middle' };
     const style = Object.assign({}, addedStyles, this.props.style);
-    const storeState = this.context.store.getState();
+    const reduxUIState = this.context.store.getState().uiState;
 
     /// Setup checkboxes
     let checkboxes = []
     const createCheckbox = (label, key, defaultVal) => {
-      const initial = storeState[key] !== undefined ? storeState[key] : defaultVal;
+      const initial = reduxUIState[key] !== undefined ? reduxUIState[key] : defaultVal;
       checkboxes.push(<div><CheckboxInput checked={initial} label={label} name={key}
         storeToggleState={this.storeInputState} /></div>)
     }
@@ -173,7 +173,7 @@ class EditItemDialog extends Component {
                 border: '1px solid gray', fontSize: '80%', padding: '0.2em 0.5em'
               }}>Generate Password</legend>
 
-              <SpinnerInput name={SETTING_PW_LENGTH} value={storeState[SETTING_PW_LENGTH] || 12}
+              <SpinnerInput name={SETTING_PW_LENGTH} value={reduxUIState[SETTING_PW_LENGTH] || 12}
                 storeSpinnerState={this.storeInputState} />
 
               {checkboxes}

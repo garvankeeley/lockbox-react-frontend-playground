@@ -32,19 +32,19 @@ class LockboxTableView extends React.Component {
   }
 
   render() {
-    const state = this.context.store.getState();
-    const allRows = state.lockboxItems;
-    const show = state.isShowPwOn;
+    const reduxUIState = this.context.store.getState().uiState;
+    const allRows = reduxUIState.lockboxItems;
+    const show = reduxUIState.isShowPwOn;
 
     var rowsToShow = allRows;
 
-    if (typeof state.filterText !== 'undefined' && state.filterText && state.filterText.length > 1) {
+    if (typeof reduxUIState.filterText !== 'undefined' && reduxUIState.filterText && reduxUIState.filterText.length > 1) {
       const searchNoCase = (haystack, needle) => {
         return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1
       }
       rowsToShow = allRows.filter(item => {
        return [item.title, item.site, item.username, item.note].some(
-            haystack => searchNoCase(haystack, state.filterText) );
+            haystack => searchNoCase(haystack, reduxUIState.filterText) );
       });
     }
 

@@ -8,7 +8,7 @@ class ShowPasswordsButton extends Component {
     const store = this.context.store;
     return <button className='btn' 
         onClick={() => {
-          const show = !store.getState().isShowPwOn;
+          const show = !store.getState().uiState.isShowPwOn;
           store.dispatch(actionShowPw(show));
         }}
         style={style}>Show Passwords</button>
