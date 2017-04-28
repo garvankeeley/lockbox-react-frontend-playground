@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { actionShowPw } from '../../redux/actions';
 
 class ShowPasswordsButton extends Component {
-  render() {
+  render () {
     const addedStyles = { borderRadius: 1, verticalAlign: 'middle' };
     const style = Object.assign({}, addedStyles, this.props.style);
     const store = this.context.store;
-    return <button className='btn' 
-        onClick={() => {
-          const show = !store.getState().uiState.isShowPwOn;
-          store.dispatch(actionShowPw(show));
-        }}
-        style={style}>Show Passwords</button>
+    return (<button className='btn'
+      onClick={() => {
+        const show = !store.getState().uiState.isShowPwOn;
+        store.dispatch(actionShowPw(show));
+      }}
+      style={style}>Show Passwords</button>);
   }
 }
 

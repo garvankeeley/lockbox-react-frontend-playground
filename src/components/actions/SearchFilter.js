@@ -21,7 +21,7 @@ class SearchFilter extends Component {
         verticalAlign: 'middle'
     };
     const style = Object.assign({}, addedStyles, this.props.style);
-    return <input type='text' placeholder="Search" 
+    return <input type='text' placeholder="Search"
       style={style}
       value={this.state.value}
       onChange={this.handleChange} />

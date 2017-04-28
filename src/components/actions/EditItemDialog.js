@@ -59,7 +59,7 @@ class EditItemDialog extends Component {
   }
 
   stateFromProps = (props) => {
-    this.dialogTitle = (props.editingItem == null)? 'Add Site' : 'Edit Site'; 
+    this.dialogTitle = (props.editingItem == null)? 'Add Site' : 'Edit Site';
 
     const editing = props.editingItem || {};
     const state = {

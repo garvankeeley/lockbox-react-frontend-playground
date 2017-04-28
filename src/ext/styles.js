@@ -10,7 +10,7 @@ var modal = {
   transition: 'opacity 1s ease-in',
   pointerEvents: 'auto',
   overflowY: 'auto'
-}
+};
 
 var container = {
   width: '400px',
@@ -18,7 +18,7 @@ var container = {
   margin: '10% auto',
   padding: '5px 20px 13px 20px',
   background: '#fff'
-}
+};
 
 var close = {
   background: '#606061',
@@ -33,10 +33,10 @@ var close = {
   fontSize: '18px',
   borderRadius: '12px',
   boxShadow: '1px 1px 3px #000',
-}
+};
 
 export default {
   modal,
   container,
   close
-}
+};

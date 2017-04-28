@@ -9,19 +9,19 @@ const LockBoxTableRow = (props) => {
   const showPw = props.showPw;
   const strength = zxcvbn(item.password).score * 25;
 
-  return <tr>
-        <ActionColumn editButtonClicked={() => props.editButtonClicked(item) }/>
-        <TitleColumn text={item.title} />
-        <DomainColumn text={item.site} />
-        <LoginColumn text={item.username} />
-        <DateColumn />
-        <DateColumn />
-        <DateColumn />
-        <td>1</td>
-        <td>Yes📄</td>
-        {showPw && <PasswordColumn text={item.password} /> }
-        {showPw && <StrengthColumn strength={strength} /> }
-        </tr>
+  return (<tr>
+    <ActionColumn editButtonClicked={() => props.editButtonClicked(item)} />
+    <TitleColumn text={item.title} />
+    <DomainColumn text={item.site} />
+    <LoginColumn text={item.username} />
+    <DateColumn />
+    <DateColumn />
+    <DateColumn />
+    <td>1</td>
+    <td>Yes📄</td>
+    {showPw && <PasswordColumn text={item.password} /> }
+    {showPw && <StrengthColumn strength={strength} /> }
+  </tr>);
 };
 
 export default LockBoxTableRow;

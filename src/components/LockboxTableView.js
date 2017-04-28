@@ -1,14 +1,14 @@
 import React from 'react';
-import LockboxTableRow from './LockboxTableRow'
+import LockboxTableRow from './LockboxTableRow';
 
 class LockboxTableView extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.tableHeaderRow = null;
     this.mainTableBody = null;
   }
 
-  updateTableHeaderCellWidthToMatchBody() {
+  updateTableHeaderCellWidthToMatchBody () {
     let headerCells = this.tableHeaderRow.children;
     let bodyCells = Array.from(this.mainTableBody.children[0].children);
 
@@ -18,33 +18,34 @@ class LockboxTableView extends React.Component {
       let width = parseFloat(getComputedStyle(elem).width.replace('px', ''));
       width += padElem - padHeader;
       headerCells[i].style.width = `${width}px`;
-    }
+    };
 
     bodyCells.forEach(tdSizer);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.updateTableHeaderCellWidthToMatchBody();
   }
 
-  componentDidMount() {
-    this.updateTableHeaderCellWidthToMatchBody()
+  componentDidMount () {
+    this.updateTableHeaderCellWidthToMatchBody();
   }
 
-  render() {
-    const reduxUIState = this.context.store.getState().uiState;
-    const allRows = reduxUIState.lockboxItems;
+  render () {
+    const reduxState = this.context.store.getState();
+    const allRows = reduxState.storageState.lockboxItems;
+    const reduxUIState = reduxState.uiState;
     const show = reduxUIState.isShowPwOn;
 
     var rowsToShow = allRows;
 
     if (typeof reduxUIState.filterText !== 'undefined' && reduxUIState.filterText && reduxUIState.filterText.length > 1) {
       const searchNoCase = (haystack, needle) => {
-        return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1
-      }
+        return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1;
+      };
       rowsToShow = allRows.filter(item => {
-       return [item.title, item.site, item.username, item.note].some(
-            haystack => searchNoCase(haystack, reduxUIState.filterText) );
+        return [item.title, item.site, item.username, item.note].some(
+          haystack => searchNoCase(haystack, reduxUIState.filterText));
       });
     }
 
@@ -53,7 +54,7 @@ class LockboxTableView extends React.Component {
       <div style={{ display: 'inline-block' }}>
         <table>
           <thead>
-            <tr ref={(e) => { this.tableHeaderRow = e }}>
+            <tr ref={(e) => { this.tableHeaderRow = e; }}>
               <th>&nbsp;</th>
               <th>Title</th>
               <th>Site</th>
@@ -64,21 +65,21 @@ class LockboxTableView extends React.Component {
               <th style={{fontSize: 'xx-small'}}>Used</th>
               <th>Note</th>
               {show && (<th>Password</th>)}
-              {show && (<th></th>)}
+              {show && (<th />)}
             </tr>
           </thead>
         </table>
 
         <table style={{ height: '250px', display: 'block', overflowY: 'scroll' }}>
-          <tbody ref={(e) => { this.mainTableBody = e }}>
+          <tbody ref={(e) => { this.mainTableBody = e; }}>
             {rowsToShow.map(item => (
-              <LockboxTableRow showPw={show} lockboxItem={item} 
-              editButtonClicked={(item) => this.props.editButtonClicked(item)}/>))}
+              <LockboxTableRow showPw={show} lockboxItem={item}
+                editButtonClicked={(item) => this.props.editButtonClicked(item)} />))}
           </tbody>
         </table>
       </div>);
   }
-};
+}
 LockboxTableView.contextTypes = {
   store: React.PropTypes.object
 };

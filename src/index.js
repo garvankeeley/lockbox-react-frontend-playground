@@ -5,17 +5,17 @@ import { createStore } from 'redux';
 
 import './index.css';
 import App from './app/App';
-import { appReducer } from './redux/reducer'
-import { initialData } from './app/initialData'
+import { appReducer } from './redux/reducer';
+import { initialData } from './app/initialData';
 
-const persistedState = localStorage.getItem('reduxState') ?
-                        JSON.parse(localStorage.getItem('reduxState')) : null
+const persistedState = localStorage.getItem('reduxState')
+  ? JSON.parse(localStorage.getItem('reduxState')) : null;
 
-let store = createStore(appReducer);
+let store = createStore(appReducer, persistedState || initialData);
 
 const render = () => ReactDOM.render(
   <Provider store={store}>
-  <App />
+    <App />
   </Provider>,
   document.getElementById('root')
 );
